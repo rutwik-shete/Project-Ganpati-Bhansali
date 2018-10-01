@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-header>
+      <mat-form-field >
+          <mat-select placeholder="Select Building" [(ngModel)] = "selectedValue" name="Building">
+            <mat-option *ngFor="let Building of Buildings" [value]="Building.value" >
+              {{Building.viewValue}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <h1>{{selectedValue}}</h1>
+  </mat-card-header>
+  <mat-card-content>
+    
+  </mat-card-content>
+</mat-card>
