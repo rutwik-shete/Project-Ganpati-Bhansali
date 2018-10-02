@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore , AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 export interface BuildingNameInterface {
   value: string;
@@ -21,26 +22,24 @@ export class WarganiCollectionComponent implements OnInit {
   nameField: string ;
   amountField: number ;
   Entery: NameAmount;
+  EnteryDoc: AngularFirestoreCollection<NameAmount> ;
 
 
   Buildings: BuildingNameInterface[] = [
-    {value: ' A Building ', viewValue: 'A'},
-    {value: ' B Building ', viewValue: 'B'},
-    {value: ' C Building ', viewValue: 'C'},
-    {value: ' D Building ', viewValue: 'D'}
-  ];
-
-  Enteries: NameAmount[] = [
-
+    {value: ' A BUILDING ', viewValue: 'A'},
+    {value: ' B BUILDING ', viewValue: 'B'},
+    {value: ' C BUILDING ', viewValue: 'C'},
+    {value: ' D BUILDING ', viewValue: 'D'}
   ];
 
   addClicked() {
 
     this.Entery = {'Name' : this.nameField , 'Amount': this.amountField} ;
 
-    this.Enteries.push(this.Entery);
+    this.writeEntery(this.Entery);
 
     this.clearText() ;
+
 
   }
 
@@ -49,9 +48,18 @@ export class WarganiCollectionComponent implements OnInit {
     this.amountField = null;
   }
 
-  constructor() { }
+  constructor(private angFirestore: AngularFirestore) {
+  }
 
   ngOnInit() {
+
+  }
+
+  writeEntery(Entery: NameAmount ) {
+    this.EnteryDoc = this.angFirestore.collection('BHANSALI CAMPUS').doc('WARGANI').collection(this.selectedValue);
+
+    this.EnteryDoc.doc(this.angFirestore.createId()).set(Entery).then(window.alert('Wargani Added'));
+
   }
 
 }
