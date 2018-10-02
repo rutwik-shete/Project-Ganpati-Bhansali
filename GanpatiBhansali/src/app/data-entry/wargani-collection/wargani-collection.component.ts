@@ -58,7 +58,7 @@ export class WarganiCollectionComponent implements OnInit {
   writeEntery(Entery: NameAmount ) {
     this.EnteryDoc = this.angFirestore.collection('BHANSALI CAMPUS').doc('WARGANI').collection(this.selectedValue);
 
-    this.EnteryDoc.doc(this.angFirestore.createId()).set(Entery).then(window.alert('Wargani Added'));
+    this.EnteryDoc.doc(this.angFirestore.createId()).set(Entery).then(window.alert);
 
   }
 

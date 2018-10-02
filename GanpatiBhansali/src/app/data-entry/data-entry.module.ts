@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
-import { DataEntryRoutingModule } from './data-entry-routing.module';
 import { WarganiCollectionComponent } from './wargani-collection/wargani-collection.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,7 +19,6 @@ export const firebaseConfig = environment.firebaseConfig ;
 @NgModule({
   imports: [
     CommonModule,
-    DataEntryRoutingModule,
     FormsModule,
 
     BrowserAnimationsModule,
