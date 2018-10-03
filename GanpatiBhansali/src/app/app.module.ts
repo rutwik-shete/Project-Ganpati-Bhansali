@@ -12,13 +12,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
+
 import { WarganiCollectionComponent } from './data-entry/wargani-collection/wargani-collection.component';
+import { SumUpTableComponent } from './sum-up-table/sum-up-table.component';
+
+import {AngularFireModule} from 'angularfire2';
+import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {environment} from '../environments/environment';
+export const firebaseConfig = environment.firebaseConfig ;
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    SumUpTableComponent
   ],
   imports: [
     BrowserModule,
@@ -32,11 +42,17 @@ import { WarganiCollectionComponent } from './data-entry/wargani-collection/warg
     MatIconModule,
     MatButtonModule,
     LayoutModule,
+    MatSelectModule,
+    MatTableModule,
+
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
 
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'Welcome', component: DashboardComponent },
       { path: 'WarganiCollection' , component: WarganiCollectionComponent},
+      { path: 'SumUpTable', component: SumUpTableComponent },
       { path: '', redirectTo: 'Welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'Welcome', pathMatch: 'full' }
     ]),

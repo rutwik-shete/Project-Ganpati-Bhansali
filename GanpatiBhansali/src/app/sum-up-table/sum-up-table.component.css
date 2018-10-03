@@ -1,0 +1,9 @@
+table {
+  width:86%;
+  margin : 7%;
+
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
