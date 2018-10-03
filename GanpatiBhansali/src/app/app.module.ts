@@ -18,8 +18,8 @@ import {MatTableModule} from '@angular/material/table';
 import { WarganiCollectionComponent } from './data-entry/wargani-collection/wargani-collection.component';
 import { SumUpTableComponent } from './sum-up-table/sum-up-table.component';
 
-import {AngularFireModule} from 'angularfire2';
-import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
 export const firebaseConfig = environment.firebaseConfig ;
 
