@@ -13,18 +13,18 @@ export class DashboardComponent {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: '', content: 'Wargani Entry' , cols: 1, rows: 1 },
-          { title: '', content: 'Summary' , cols: 1, rows: 1 },
-          { title: '', content: 'SOMETHING' , cols: 1, rows: 1 },
-          { title: '', content: 'SOMETHING' , cols: 1, rows: 1 }
+          { title: '', content: 'Wargani Entry' , routeDef: 'WarganiCollection', cols: 1, rows: 1 },
+          { title: '', content: 'Summary' , routeDef: 'SumUpTable', cols: 1, rows: 1 },
+          { title: '', content: 'SOMETHING' , routeDef: '', cols: 1, rows: 1 },
+          { title: '', content: 'SOMETHING' , routeDef: '', cols: 1, rows: 1 }
         ];
       }
 
       return [
-        { title: '', content: 'Wargani Entry' , cols: 2, rows: 1 },
-        { title: '', content: 'Summary' , cols: 1, rows: 1 },
-        { title: '', content: 'SOMETHING' , cols: 1, rows: 2 },
-        { title: '', content: 'SOMETHING' , cols: 1, rows: 1 }
+        { title: '', content: 'Wargani Entry' , routeDef: 'WarganiCollection', cols: 2, rows: 1 },
+        { title: '', content: 'Summary' , routeDef: 'SumUpTable', cols: 1, rows: 1 },
+        { title: '', content: 'SOMETHING' , routeDef: '', cols: 1, rows: 2 },
+        { title: '', content: 'SOMETHING' , routeDef: '', cols: 1, rows: 1 }
       ];
     })
   );
