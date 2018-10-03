@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 
 export interface BuildingNameInterface {
   value: string;
@@ -23,7 +23,8 @@ export class SumUpTableComponent implements OnInit {
 
   selectedValue: string;
   dataCollection: AngularFirestoreCollection<BuildingWargani>;
-  data: Observable <BuildingWargani[]>;
+  datas: Observable <BuildingWargani[]>;
+  Total: number;
 
   Buildings: BuildingNameInterface[] = [
     {value: ' A BUILDING ', viewValue: 'A'},
@@ -42,16 +43,36 @@ export class SumUpTableComponent implements OnInit {
     {Name: 'Swim suit', Amount: 15},
   ];
 
-  /** Gets the total Amount of all buildingWargani. */
-  getTotalCost() {
-    return this.buildingWargani.map(t => t.Amount).reduce((acc, value) => acc + value, 0);
+  products: BuildingWargani[];
 
+  /** Gets the total Amount of all buildingWargani. */
+  getDatas(): Observable<BuildingWargani[]> {
+    return this.datas.pipe(
+      tap(data => console.log(data.length)));
+  }
+
+  getAmount(): Observable<BuildingWargani | undefined> {
+    return this.getDatas().pipe(
+      map((data: BuildingWargani[]) => data.find(p => p.Amount > 0))
+    );
   }
 
   selectBuilding() {
     this.dataCollection = this.angfirestore.collection('BHANSALI CAMPUS/WARGANI/' + this.selectedValue);
-    this.data = this.dataCollection.valueChanges();
+    this.datas = this.dataCollection.valueChanges();
+
+
+    this.getDatas().subscribe(
+      products => {
+        this.products = products;
+      },
+    );
+
+    this.getAmount().subscribe(
+      product => console.log('New: ' + JSON.stringify(product.Amount))
+      );
   }
+
 
   constructor(private angfirestore: AngularFirestore) { }
 
