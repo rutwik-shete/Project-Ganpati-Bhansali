@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import * as jsPDF from 'jspdf' ;
+import * as html2canvas from 'html2canvas';
 
 export interface BuildingNameInterface {
   value: string;
@@ -37,14 +39,6 @@ export class SumUpTableComponent implements OnInit {
   ];
 
   displayedColumns: string[] = ['Name', 'Wargani'];
-  buildingWargani: BuildingWargani[] = [
-    {Name: 'Beach ball', Amount: 4},
-    {Name: 'Towel', Amount: 5},
-    {Name: 'Frisbee', Amount: 2},
-    {Name: 'Sunscreen', Amount: 4},
-    {Name: 'Cooler', Amount: 25},
-    {Name: 'Swim suit', Amount: 15},
-  ];
 
   selectBuilding() {
     this.dataCollection = this.angfirestore.collection('BHANSALI CAMPUS/WARGANI/' + this.selectedValue);
@@ -70,6 +64,32 @@ export class SumUpTableComponent implements OnInit {
 
   }
 
+  DownPdf() {
+
+    html2canvas(document.getElementById('PeopleTable')).then(function(canvas) {
+    const imgData = canvas.toDataURL('image/png');
+
+      const imgWidth = 210;
+      const pageHeight = 296;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+
+      const doc = new jsPDF('p', 'mm');
+      let position = 0;
+
+      doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        doc.addPage();
+        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      doc.save( 'file.pdf');
+        });
+    }
+    
   constructor(private angfirestore: AngularFirestore) { }
 
   ngOnInit() {
