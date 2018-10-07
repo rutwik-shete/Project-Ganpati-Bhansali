@@ -1,9 +1,20 @@
 table {
   width:86%;
+  margin-top: 0%;
   margin : 7%;
 
 }
 
 tr.mat-footer-row {
   font-weight: bold;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  margin: 15%;
+  margin-top: 0%;
+  margin-bottom: 0%;
 }

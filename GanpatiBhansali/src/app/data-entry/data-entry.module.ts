@@ -10,6 +10,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
@@ -27,6 +29,8 @@ export const firebaseConfig = environment.firebaseConfig ;
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatTableModule,
+    MatProgressBarModule,
 
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,

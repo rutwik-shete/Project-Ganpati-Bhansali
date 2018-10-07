@@ -14,6 +14,8 @@ import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButt
 import { LayoutModule } from '@angular/cdk/layout';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 import { WarganiCollectionComponent } from './data-entry/wargani-collection/wargani-collection.component';
 import { SumUpTableComponent } from './sum-up-table/sum-up-table.component';
@@ -44,6 +46,7 @@ export const firebaseConfig = environment.firebaseConfig ;
     LayoutModule,
     MatSelectModule,
     MatTableModule,
+    MatProgressBarModule,
 
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,

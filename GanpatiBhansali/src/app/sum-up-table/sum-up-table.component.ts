@@ -31,6 +31,8 @@ export class SumUpTableComponent implements OnInit {
   dataLength: number ;
   inc: number ;
 
+  showProgress: boolean ;
+
   Buildings: BuildingNameInterface[] = [
     {value: ' A BUILDING ', viewValue: 'A'},
     {value: ' B BUILDING ', viewValue: 'B'},
@@ -41,6 +43,7 @@ export class SumUpTableComponent implements OnInit {
   displayedColumns: string[] = ['Name', 'Wargani'];
 
   selectBuilding() {
+    this.showProgress = true ;
     this.dataCollection = this.angfirestore.collection('BHANSALI CAMPUS/WARGANI/' + this.selectedValue);
     this.datas = this.dataCollection.valueChanges();
 
@@ -58,6 +61,7 @@ export class SumUpTableComponent implements OnInit {
       this.amountArray = product;
       for ( this.inc = 0 ; this.inc < this.dataLength ; this.inc++) {
         this.totalAmount = this.totalAmount + this.amountArray[ this.inc ] ;
+        this.showProgress = false;
         console.log(this.totalAmount);
      }
       console.log('New: ' + JSON.stringify(this.amountArray)); });
@@ -70,7 +74,7 @@ export class SumUpTableComponent implements OnInit {
     const imgData = canvas.toDataURL('image/png');
 
       const imgWidth = 210;
-      const pageHeight = 296;
+      const pageHeight = 295;
       const imgHeight = canvas.height * imgWidth / canvas.width;
       let heightLeft = imgHeight;
 
@@ -89,7 +93,7 @@ export class SumUpTableComponent implements OnInit {
       doc.save( 'file.pdf');
         });
     }
-    
+
   constructor(private angfirestore: AngularFirestore) { }
 
   ngOnInit() {

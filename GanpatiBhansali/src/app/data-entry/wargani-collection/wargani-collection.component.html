@@ -1,4 +1,4 @@
-<mat-card style= " margin: 15%">
+<mat-card style= "margin : 15% ; margin-top : 2% ; margin-bottom: 0% ">
   <mat-card-title style="text-align : center">
     <mat-select placeholder="Select Building" [(ngModel)]="selectedValue" name="Building" (selectionChange)='clearText()' style="margin-bottom:10% ">
       <mat-option *ngFor="let Building of Buildings" [value]="Building.value">
@@ -19,4 +19,31 @@
 
     <button mat-raised-button color="accent" *ngIf="nameField && amountField" (click)='addClicked()'>Add</button>
 
-</mat-card>
+  </mat-card>
+
+  <section class="example-section" *ngIf='showProgress'>
+      <mat-progress-bar
+          color="primary"
+          mode="indeterminate">
+      </mat-progress-bar>
+    </section>
+
+  <div id='List_Table' style = 'margin : 10% ; margin-top: 1%'>
+    <table mat-table [dataSource]="datas" class="mat-elevation-z8" *ngIf='selectedValue' >
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let data"> {{data.Name}} </td>
+            <td mat-footer-cell *matFooterCellDef> Total </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Wargani">
+            <th mat-header-cell *matHeaderCellDef> Wargani </th>
+            <td mat-cell *matCellDef="let data" > {{ data.Amount | currency:'INR':'symbol'}} </td>
+            <td mat-footer-cell *matFooterCellDef > {{ totalAmount | currency :'INR':'symbol'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      </table>
+  </div>
